@@ -2,6 +2,11 @@
 
 Crypto Bank Dapp is a decentralized application that allows users to deposit and withdraw Ethereum (ETH). It is a smart contract-based solution that aims to simplify the management of your digital assets. This dapp is deployed on the Sepolia ETH Testnet, but can also be run and tested locally using Hardhat.
 
+
+![bank](public/bank.jpg)
+
+
+
 ## Features
 
 - Deposit ETH to your account
