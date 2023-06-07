@@ -27,7 +27,7 @@ To get a local copy up and running, follow these simple steps.
 
 1. Clone the repo
 \`\`\`
-git clone https://github.com/yourusername/Crypto-Bank-Dapp.git
+git clone [https://github.com/yourusername/Crypto-Bank-Dapp.git](https://github.com/Enerjys-1er/crypto_bank.git)
 \`\`\`
 
 2. Install the dependencies
