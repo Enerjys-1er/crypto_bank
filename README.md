@@ -56,6 +56,7 @@ npm run gogo
 ```
 
 ### On HARDHAT
+Change the value of BankAddress in the file : `src/app.js` and run this command
 ```
 npm run prev
 ```
