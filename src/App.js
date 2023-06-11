@@ -1,34 +1,41 @@
+// Importing CSS files and necessary libraries
 import './App.css';
-import { useAccount } from 'wagmi'
-import { useState, useEffect } from 'react'
-import { ethers } from 'ethers';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { FaEthereum } from 'react-icons/fa';
+import { useAccount } from 'wagmi'// Importing useAccount hook from 'wagmi' library
+import { useState, useEffect } from 'react' // Importing useState and useEffect hooks from React
+import { ethers } from 'ethers'; // Importing ethers library to interact with Ethereum blockchain
+import { ConnectButton } from '@rainbow-me/rainbowkit'; // Importing ConnectButton component to enable user to connect to their Ethereum wallet
+import { FaEthereum } from 'react-icons/fa'; // Importing Ethereum logo
 
+// Importing the 'Bank' smart contract
 import Bank from './artifacts/contracts/Bank.sol/Bank.json'
 
-const BankAddress = "0xf83755cE557D8913b7F224F13911298eec38Fd88"; //address of contract on sepolia
-// for hardhat : 0x5FbDB2315678afecb367f032d93F642f64180aa3
+// Address of the 'Bank' smart contract on the Sepolia Ethereum network, on Hardhat : 0x5FbDB2315678afecb367f032d93F642f64180aa3
+const BankAddress = "0xf83755cE557D8913b7F224F13911298eec38Fd88";
 
 function App() {
-  // WAGMI
+  
+  // Using the useAccount hook to retrieve the connected account's address
   const { address } = useAccount();
-  // USE STATE
-  const [balance, setBalance] = useState(0);
-  const [balanceContract, setBalanceContract] = useState(0);
-  const [amountSend, setAmountSend] = useState();
-  const [amountWithdraw, setAmountWithdraw] = useState();
-  const [events, setEvents] = useState([]);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingMsg, setIsLoadingMsg] = useState('');
 
+  // Initialising the application states using useState hook
+  const [balance, setBalance] = useState(0); // User balance
+  const [balanceContract, setBalanceContract] = useState(0); // Contract balance
+  const [amountSend, setAmountSend] = useState(); // Amount to send
+  const [amountWithdraw, setAmountWithdraw] = useState(); // Amount to withdraw
+  const [events, setEvents] = useState([]); // Storing contract events
+  const [error, setError] = useState(''); // Handling errors
+  const [success, setSuccess] = useState(''); // Successful operation messages
+  const [isLoading, setIsLoading] = useState(false); // Loading status
+  const [isLoadingMsg, setIsLoadingMsg] = useState(''); // Loading message
+  
+
+  // Using useEffect hook to call getBalance and getEvents functions on page load
   useEffect(() => {
     getBalance();
     getEvents();
   }, [])
 
+  // Function to get the user's and the contract's balance
   async function getBalance() {
     setIsLoading(true);
     setIsLoadingMsg("Fetch balance and events...");
@@ -53,6 +60,7 @@ function App() {
 
   }
 
+  // Function to perform a transfer to the contract
   async function transfer() {
     if (!amountSend) {
       return;
@@ -82,7 +90,8 @@ function App() {
     setIsLoadingMsg("");
 
   }
-
+  
+  // Function to perform a withdrawal from the contract
   async function withdraw() {
     if (!amountWithdraw) {
       return;
@@ -91,8 +100,6 @@ function App() {
     setSuccess('');
     setIsLoading(true);
     setIsLoadingMsg("Withdraw in progress...");
-
-
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -114,14 +121,17 @@ function App() {
 
   }
 
+  // Function to update the amount to send
   function changeAmountSend(e) {
     setAmountSend(e.target.value);
   }
 
+  // Function to update the amount to withdraw
   function changeAmountWithdraw(e) {
     setAmountWithdraw(e.target.value);
   }
 
+  // Function to get contract's events
   async function getEvents() {
     if (typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -148,6 +158,7 @@ function App() {
     }
   }
 
+  // Rendering the application
   return (
     <div className="App">
       <ConnectButton />
@@ -212,4 +223,5 @@ function App() {
 
 }
 
+// Exporting the App component
 export default App;

@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli, hardhat, sepolia } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+import React from 'react'; // Importing React library
+import ReactDOM from 'react-dom/client'; // Importing ReactDOM for DOM manipulations
+import './index.css'; // Importing the main stylesheet for this app
+import App from './App'; // Importing the App component
+import reportWebVitals from './reportWebVitals'; // Importing reportWebVitals for measuring performance 
+import '@rainbow-me/rainbowkit/styles.css'; // Importing RainbowKit styles
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'; // Importing RainbowKit components and functions for wallet connection
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'; // Importing functions from wagmi library for blockchain configuration
+import { mainnet, polygon, optimism, arbitrum, goerli, hardhat, sepolia } from 'wagmi/chains'; // Importing various blockchain networkss
+import { publicProvider } from 'wagmi/providers/public'; // Importing publicProvider from wagmi
 
+// Configuring blockchains with public providers
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
     sepolia, 
@@ -19,13 +20,14 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     publicProvider()
   ]
 );
-
+// Setting up default wallets for the specified chains
 const { connectors } = getDefaultWallets({
   appName: 'Crypto Bank',
   projectId: '',
   chains,
 });
 
+// Creating the configuration for wagmi 
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
@@ -33,7 +35,10 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 });
 
+// Selecting the root div where the app will be attached
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Rendering the app inside WagmiConfig and RainbowKitProvider 
 root.render(
   <WagmiConfig config={wagmiConfig}>
     <RainbowKitProvider chains={chains}>
@@ -42,7 +47,5 @@ root.render(
   </WagmiConfig>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Measuring performance of the app with reportWebVitals
 reportWebVitals();
