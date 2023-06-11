@@ -1,13 +1,13 @@
 <h1 align="center">
 🚀🏦🚀 Crypto Bank Dapp 🚀🏦🚀
-<h1>
-<p align="justify">
-Crypto Bank Dapp is a decentralized application that allows users to deposit and withdraw Ethereum.
-It is a smart contract-based solution that aims to simplify the management of your digital assets. 
+</h1>
+<h3 align="justify">
+Crypto Bank Dapp is a decentralized application that allows users to deposit and withdraw Ethereum. <br/>
+It is a smart contract-based solution that aims to simplify the management of your digital assets. <br/>
 This dapp is deployed on the Sepolia Testnet.
-</p>
+</h3>
 <p align="center">
-  <img alt="Bank" src="public/bank.jpg" width="700" title="hover text">
+  <img alt="Bank" src="public/bank.jpg" width="600" title="hover text">
 </p>
 
 
